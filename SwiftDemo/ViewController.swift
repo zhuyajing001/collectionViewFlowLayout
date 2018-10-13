@@ -18,6 +18,10 @@ class ViewController: UIViewController {
         
         let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         
+        let slider = UISlider.init(frame: CGRect(x: 10, y: 10, width: 100, height: 10))
+        // slider value change ,listen shou touch up
+        slider.addTarget(self, action: #selector(sliderValueChange(slider:event:)), for: .valueChanged)
+        
         
         button.backgroundColor = UIColor.yellow
         button.titleLabel?.textAlignment = .center
@@ -35,6 +39,21 @@ class ViewController: UIViewController {
         print(directionAll.allCases)
        
     }
+    
+    @objc func sliderValueChange(slider:UISlider,event:UIEvent) -> Void {
+        let touchEvent = event.allTouches?.first
+        let pha = touchEvent?.phase
+        switch pha {
+        case .ended?:
+            print("end")
+            break;
+        default:
+            print("value change")
+            break;
+        }
+    }
+    
+    
     func filterMethod(num:Int) -> Bool {
         return num % 2 == 0
     }
